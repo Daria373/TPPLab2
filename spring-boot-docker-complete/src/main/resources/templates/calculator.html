@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <style>
+        /* Основні стилі для центрації та оформлення калькулятора */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6f2ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+        }
+        h1 {
+            margin-bottom: 25px;
+            color: #004080;
+        }
+        input[type="text"] {
+            /* Стиль поля вводу для виразу */
+            width: 80%;
+            padding: 12px;
+            border: 2px solid #b3d1ff;
+            border-radius: 6px;
+            margin: 0 auto 20px auto;
+            font-size: 16px;
+            display: block; 
+            text-align: center; 
+        }
+        button {
+            /* Стиль кнопки "Розрахувати" */
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        .result {
+            /* Стиль для відображення результату */
+            font-weight: bold;
+            color: #004080;
+        }
+        .error {
+            /* Стиль для відображення помилки */
+            color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Калькулятор</h1>
+        <form action="/calculate" method="post">
+            <input type="text" name="expression" placeholder="Введіть математичний вираз" required>
+            <button type="submit">Розрахувати</button>
+        </form>
+        <!-- Відображення результату, якщо він обчислений -->
+        <p th:if="${result != null}" class="result">Результат: <span th:text="${result}"></span></p>
+        <!-- Відображення повідомлення про помилку, якщо вона виникла -->
+        <p th:if="${error != null}" class="error" th:text="${error}"></p>
+    </div>
+</body>
+</html>
